@@ -1,35 +1,27 @@
-@import './base.css';
+:root{
+  --bg: #ffffff;
+  --text: #0f172a;           /* slate-900 */
+  --muted: #64748b;          /* slate-500 */
+  --border: rgba(15,23,42,.10);
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+  --purple: #6d28d9;         /* violet-700 */
+  --purple-2: #8b5cf6;       /* violet-500 */
+  --gold: #d4a72c;           /* warm gold */
+  --card: rgba(255,255,255,.86);
+  --shadow: 0 12px 30px rgba(15,23,42,.10);
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+html, body {
+  height: 100%;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  background: radial-gradient(1200px 700px at 10% 0%, rgba(139,92,246,.12), transparent 55%),
+              radial-gradient(900px 520px at 90% 10%, rgba(212,167,44,.14), transparent 60%),
+              var(--bg);
+  color: var(--text);
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
-}
+a{ color: inherit; text-decoration: none; }
