@@ -24,13 +24,7 @@ onMounted(async () => {
 <template>
   <main class="page">
     <header class="topbar">
-      <div class="brand">
-        <div class="mark">DB</div>
-        <div>
-          <div class="name">Digital Bank</div>
-          <div class="tag">Secure. Simple. Modern.</div>
-        </div>
-      </div>
+
 
       <nav class="nav">
         <RouterLink class="link" to="/">Home</RouterLink>
@@ -41,16 +35,14 @@ onMounted(async () => {
     <section class="hero">
       <div class="heroText">
         <h1>
-          Banking, redesigned
-          <span class="accent">for clarity</span>.
+          Banka Pro Max
+    
         </h1>
-        <p>
-          A clean interface for accounts, transactions, and insights — built with Vue + Laravel.
-        </p>
+
 
         <div class="ctaRow">
-          <a class="btn primary" href="#features">Get started</a>
-          <a class="btn ghost" href="#status">System status</a>
+          <a class="btn primary" href="#features">Uzsākt</a>
+          <a class="btn primary" href="#status">Uzzināt Statusu</a>
         </div>
 
         <div id="status" class="statusRow">
@@ -61,13 +53,13 @@ onMounted(async () => {
       <div class="heroCard">
         <div class="cardHeader">
           <div class="cardTitle">Overview</div>
-          <div class="chip">Prototype</div>
+          <div class="chip">Max</div>
         </div>
 
         <div class="metric">
           <div class="metricLabel">Balance</div>
           <div class="metricValue">€ 12,480.00</div>
-          <div class="metricHint">Example data (UI only)</div>
+          <div class="metricHint">Biznesa konts</div>
         </div>
 
         <div class="divider" />
@@ -77,8 +69,8 @@ onMounted(async () => {
             <div class="rowLeft">
               <div class="icon gold" />
               <div>
-                <div class="rowTitle">Spending insights</div>
-                <div class="rowSub">Monthly breakdown & trends</div>
+                <div class="rowTitle">Tērēšanas statistika</div>
+                <div class="rowSub">Mēneša tēriņi & Filtri</div>
               </div>
             </div>
             <div class="rowRight">→</div>
@@ -88,8 +80,8 @@ onMounted(async () => {
             <div class="rowLeft">
               <div class="icon purple" />
               <div>
-                <div class="rowTitle">Transfers</div>
-                <div class="rowSub">Fast internal payments</div>
+                <div class="rowTitle">Pārksaitījumi</div>
+                <div class="rowSub">Ātras internālas sistēmas</div>
               </div>
             </div>
             <div class="rowRight">→</div>
@@ -99,8 +91,8 @@ onMounted(async () => {
             <div class="rowLeft">
               <div class="icon slate" />
               <div>
-                <div class="rowTitle">Security</div>
-                <div class="rowSub">Session & access controls</div>
+                <div class="rowTitle">Drošība</div>
+                <div class="rowSub">Sesija & piekļuves kontrole</div>
               </div>
             </div>
             <div class="rowRight">→</div>
@@ -127,8 +119,6 @@ onMounted(async () => {
     <footer class="footer">
       <div>© {{ new Date().getFullYear() }} Digital Bank</div>
       <div class="footRight">
-        <span class="dotPurple" />
-        <span>Vue + Laravel</span>
       </div>
     </footer>
   </main>
