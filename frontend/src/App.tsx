@@ -1,16 +1,17 @@
-import { useEffect, useState } from 'react'
-import api from './lib/api'
+import { HomePage } from './components/HomePage'
+import { Navigation } from './components/Navigation'
+import { Footer } from './components/Footer'
 
 function App() {
-  const [status, setStatus] = useState('Testing...')
-
-  useEffect(() => {
-    api.get('/api/test')
-      .then(() => setStatus('✅ Connected to Laravel!'))
-      .catch(() => setStatus('❌ Connection failed'))
-  }, [])
-
-  return <div><h1>{status}</h1></div>
+  return (
+    <div className="min-h-screen bg-white text-neutral-900 font-sans">
+      <Navigation />
+      <main>
+        <HomePage />
+      </main>
+      <Footer />
+    </div>
+  )
 }
 
 export default App
