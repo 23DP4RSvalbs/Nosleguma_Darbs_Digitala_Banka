@@ -1,4 +1,4 @@
-# Banka
+# Digitālā Banka
 
 Mans projekts ir funkcionējoša tīmekļa lietojumprogramma, kas apkopo digitālās bankas galvenās funkcijas. Tā ir izveidota no divām daļām: API servera un lietotāja interfeisa.
 
