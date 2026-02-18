@@ -1,11 +1,16 @@
 import { ArrowRight } from "lucide-react";
 import { ImageWithFallback } from "./ImageWithFallback";
+import { ApiStatusAlert } from "./ApiStatusAlert";
 
 export function HomePage() {
   return (
     <div className="min-h-screen w-full bg-neutral-50/50 pt-20 font-sans text-neutral-900 overflow-hidden relative">
       <div className="absolute top-[-20%] left-[-10%] w-[80vw] h-[80vw] bg-neutral-200/40 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] bg-slate-200/30 rounded-full blur-[100px] pointer-events-none" />
+
+      <div className="max-w-[1400px] mx-auto px-6 pt-4">
+        <ApiStatusAlert />
+      </div>
 
       <section className="relative min-h-[90vh] flex flex-col justify-center px-6">
         <div className="max-w-[1400px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative z-10">
@@ -83,7 +88,7 @@ export function HomePage() {
                   img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjeWJlcnNlY3VyaXR5JTIwYWJzdHJhY3R8ZW58MHx8fHwxNzI5NzAyMjAwfDA&ixlib=rb-4.1.0&q=80&w=1080"
                 },
                 {
-                  title: "Momentānie Pārskaitījumi",
+                  title: "Ātri Pārskaitījumi",
                   desc: "Nauda pārvietojas gaismas ātrumā. Nekādu brīvdienu, nekādu kavējumu.",
                   img: "https://images.unsplash.com/photo-1518770660439-4636190af475?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWNoJTIwY2hpcHxlbnwwfHx8fDE3Mjk3MDIyMDB8MA&ixlib=rb-4.1.0&q=80&w=1080"
                 },
