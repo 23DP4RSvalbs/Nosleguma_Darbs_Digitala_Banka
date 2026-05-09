@@ -2524,9 +2524,11 @@ function App() {
               </div>
 
               <form onSubmit={handleTwoFactorSetupConfirm} className="mt-4 space-y-3">
-                <label className="block text-sm font-medium">
+                <label htmlFor="2fa-setup-code" className="block text-sm font-medium">
                   Ievadi 6-ciparu kodu no Authenticator lietotnes
                   <input
+                    id="2fa-setup-code"
+                    aria-label="Ievadi 6 ciparu kodu"
                     required
                     inputMode="numeric"
                     pattern="[0-9]{6}"
@@ -2582,9 +2584,11 @@ function App() {
               </p>
 
               <form onSubmit={handleTwoFactorLoginConfirm} className="mt-4 space-y-3">
-                <label className="block text-sm font-medium">
+                <label htmlFor="2fa-challenge-code" className="block text-sm font-medium">
                   6-ciparu kods
                   <input
+                    id="2fa-challenge-code"
+                    aria-label="6 ciparu kods"
                     required
                     inputMode="numeric"
                     pattern="[0-9]{6}"
@@ -2955,9 +2959,11 @@ function App() {
             <h3 className="text-base font-semibold text-bank-ink">{promptDialog.title}</h3>
             <p className="mt-2 text-sm leading-relaxed text-bank-muted">{promptDialog.message}</p>
 
-            <label className="mt-4 block text-xs font-semibold uppercase tracking-[0.12em] text-bank-muted">
+            <label htmlFor="prompt-dialog-input" className="mt-4 block text-xs font-semibold uppercase tracking-[0.12em] text-bank-muted">
               Nosaukums
               <input
+                id="prompt-dialog-input"
+                aria-label="Nosaukums"
                 autoFocus
                 maxLength={promptDialog.maxLength}
                 placeholder={promptDialog.placeholder}

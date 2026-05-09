@@ -67,8 +67,7 @@ npm run lint
 
 ## Demo Dati
 
-- Demo konti ir latviešu valodā.
-- Visiem demo kontiem 2FA ir atslēgts.
+- Visiem demo kontiem ir 2FA.
 - `Konti.txt` satur sākotnējos piekļuves datus.
 - Demo datubāzi var atjaunot ar `php artisan db:seed` backend mapē.
 
@@ -77,9 +76,3 @@ npm run lint
 - Lietotāja saskarne ir veidota ar uzsvaru uz WCAG pieejamību.
 - Funkcijas ir sadalītas pēc lomām un aizsargātas ar autorizāciju.
 - Ievaddati tiek validēti gan frontenda, gan backenda pusē.
-
-## Piezīmes
-
-- Produkcijas kods atrodas tikai `backend/` un `frontend/` mapēs.
-- Nevajadzīgie frontend utilītu skripti ir noņemti.
-- Projekts darbojas lokāli ar SQLite bez ārēja datubāzes servera, ja izmanto šīs repozitorija noklusējuma konfigurāciju.

@@ -193,9 +193,11 @@ export function DashboardAccountsView({
               <article className="mb-4 rounded-xl border border-bank-border bg-bank-panel-soft/55 p-4">
                 <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-bank-muted">Filtri un kārtošana</h3>
                 <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-6">
-                  <label className="min-w-0 text-xs font-semibold uppercase leading-tight text-bank-muted">
+                  <label htmlFor="acct-filter-q" className="min-w-0 text-xs font-semibold uppercase leading-tight text-bank-muted">
                     Meklēšana
                     <input
+                      id="acct-filter-q"
+                      aria-label="Meklēšana"
                       maxLength={120}
                       value={accountFiltersDraft.q}
                       onChange={(event) =>
@@ -205,9 +207,11 @@ export function DashboardAccountsView({
                     />
                   </label>
 
-                  <label className="min-w-0 text-xs font-semibold uppercase leading-tight text-bank-muted">
+                  <label htmlFor="acct-filter-status" className="min-w-0 text-xs font-semibold uppercase leading-tight text-bank-muted">
                     Statuss
                     <select
+                      id="acct-filter-status"
+                      aria-label="Statuss"
                       value={accountFiltersDraft.status}
                       onChange={(event) =>
                         setAccountFiltersDraft((prev) => ({
@@ -224,9 +228,11 @@ export function DashboardAccountsView({
                     </select>
                   </label>
 
-                  <label className="min-w-0 text-xs font-semibold uppercase leading-tight text-bank-muted">
+                  <label htmlFor="acct-filter-type" className="min-w-0 text-xs font-semibold uppercase leading-tight text-bank-muted">
                     Tips
                     <select
+                      id="acct-filter-type"
+                      aria-label="Tips"
                       value={accountFiltersDraft.type}
                       onChange={(event) =>
                         setAccountFiltersDraft((prev) => ({
@@ -243,9 +249,11 @@ export function DashboardAccountsView({
                     </select>
                   </label>
 
-                  <label className="min-w-0 text-xs font-semibold uppercase leading-tight text-bank-muted">
+                  <label htmlFor="acct-filter-currency" className="min-w-0 text-xs font-semibold uppercase leading-tight text-bank-muted">
                     Valūta
                     <select
+                      id="acct-filter-currency"
+                      aria-label="Valūta"
                       value={accountFiltersDraft.currency}
                       onChange={(event) =>
                         setAccountFiltersDraft((prev) => ({ ...prev, currency: event.target.value }))
@@ -260,9 +268,11 @@ export function DashboardAccountsView({
                     </select>
                   </label>
 
-                  <label className="min-w-0 text-xs font-semibold uppercase leading-tight text-bank-muted">
+                  <label htmlFor="acct-filter-sort-by" className="min-w-0 text-xs font-semibold uppercase leading-tight text-bank-muted">
                     Kārtot pēc
                     <select
+                      id="acct-filter-sort-by"
+                      aria-label="Kārtot pēc"
                       value={accountFiltersDraft.sort_by}
                       onChange={(event) =>
                         setAccountFiltersDraft((prev) => ({
@@ -279,9 +289,11 @@ export function DashboardAccountsView({
                     </select>
                   </label>
 
-                  <label className="min-w-0 text-xs font-semibold uppercase leading-tight text-bank-muted">
+                  <label htmlFor="acct-filter-sort-dir" className="min-w-0 text-xs font-semibold uppercase leading-tight text-bank-muted">
                     Virziens
                     <select
+                      id="acct-filter-sort-dir"
+                      aria-label="Virziens"
                       value={accountFiltersDraft.sort_dir}
                       onChange={(event) =>
                         setAccountFiltersDraft((prev) => ({
@@ -461,9 +473,11 @@ export function DashboardAccountsView({
 
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_300px]">
             <form onSubmit={handleCreateAccount} className="space-y-3">
-              <label className="block text-xs font-semibold uppercase text-bank-muted">
+              <label htmlFor="new-account-name" className="block text-xs font-semibold uppercase text-bank-muted">
                 Nosaukums
                 <input
+                  id="new-account-name"
+                  aria-label="Nosaukums"
                   required
                   maxLength={80}
                   value={newAccount.name}
@@ -476,9 +490,11 @@ export function DashboardAccountsView({
               </label>
 
               <div className="grid gap-3 sm:grid-cols-2">
-                <label className="block text-xs font-semibold uppercase text-bank-muted">
+                <label htmlFor="new-account-currency" className="block text-xs font-semibold uppercase text-bank-muted">
                   Valūta
                   <select
+                    id="new-account-currency"
+                    aria-label="Valūta"
                     value={newAccount.currency}
                     onChange={(event) =>
                       setNewAccount((prev) => ({ ...prev, currency: event.target.value }))
@@ -495,9 +511,11 @@ export function DashboardAccountsView({
                   </select>
                 </label>
 
-                <label className="block text-xs font-semibold uppercase text-bank-muted">
+                <label htmlFor="new-account-type" className="block text-xs font-semibold uppercase text-bank-muted">
                   Tips
                   <select
+                    id="new-account-type"
+                    aria-label="Tips"
                     value={newAccount.type}
                     onChange={(event) =>
                       setNewAccount((prev) => ({ ...prev, type: event.target.value as NewAccountState['type'] }))
@@ -540,9 +558,11 @@ export function DashboardAccountsView({
 
           <div className="mb-4 grid gap-3 lg:grid-cols-[minmax(0,1fr)_330px] lg:items-start">
             <div className="space-y-2">
-              <label className="block text-xs font-semibold uppercase tracking-wider text-bank-muted">
+              <label htmlFor="member-active-account" className="block text-xs font-semibold uppercase tracking-wider text-bank-muted">
                 Aktīvais konts
                 <select
+                  id="member-active-account"
+                  aria-label="Aktīvais konts"
                   value={memberPanelAccountId ?? ''}
                   onChange={(event) => {
                     const nextId = Number(event.target.value);

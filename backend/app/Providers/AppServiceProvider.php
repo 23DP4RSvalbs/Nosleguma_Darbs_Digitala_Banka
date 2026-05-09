@@ -63,5 +63,39 @@ class AppServiceProvider extends ServiceProvider
                 Limit::perMinute($limit)->by(($userKey !== null ? (string) $userKey : 'guest').'|'.$ipKey),
             ];
         });
+
+        // More granular limits for transaction and account write operations
+        RateLimiter::for('transactions-write', function (Request $request) use ($disableRateLimiting) {
+            $userKey = $request->user()?->getAuthIdentifier();
+            $ipKey = (string) $request->ip();
+
+            $limit = $disableRateLimiting ? 10000 : 20;
+
+            return [
+                Limit::perMinute($limit)->by(($userKey !== null ? (string) $userKey : 'guest').'|'.$ipKey),
+            ];
+        });
+
+        RateLimiter::for('accounts-write', function (Request $request) use ($disableRateLimiting) {
+            $userKey = $request->user()?->getAuthIdentifier();
+            $ipKey = (string) $request->ip();
+
+            $limit = $disableRateLimiting ? 10000 : 12;
+
+            return [
+                Limit::perMinute($limit)->by(($userKey !== null ? (string) $userKey : 'guest').'|'.$ipKey),
+            ];
+        });
+
+        RateLimiter::for('approvals-action', function (Request $request) use ($disableRateLimiting) {
+            $userKey = $request->user()?->getAuthIdentifier();
+            $ipKey = (string) $request->ip();
+
+            $limit = $disableRateLimiting ? 10000 : 10;
+
+            return [
+                Limit::perMinute($limit)->by(($userKey !== null ? (string) $userKey : 'guest').'|'.$ipKey),
+            ];
+        });
     }
 }
