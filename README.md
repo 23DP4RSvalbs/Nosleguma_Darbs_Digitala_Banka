@@ -1,21 +1,85 @@
-# Digitālā Banka
+# Noslēguma Darbs: Digitālā Banka
 
-Mans projekts ir funkcionējoša tīmekļa lietojumprogramma, kas apkopo digitālās bankas galvenās funkcijas. Tā ir izveidota no divām daļām: API servera un lietotāja interfeisa.
+Digitālās bankas tīmekļa lietotne ar Laravel backendu un React frontendiem. Projekts ietver autentifikāciju, lomu sadalījumu, kontu un transakciju pārvaldību, apstiprinājumu plūsmu, statistiku, PWA atbalstu un demo datu kopu demonstrācijai.
 
-## Par sistēmu
+## Projekta Saturs
 
-Šis ir tīmekļa risinājums, kas apkopo jaunākās tehnoloģijas. Tas paredzēts, lai veidotu drošu vidi bankas darījumiem tiešsaistē.
+- `backend/` - Laravel API, migrācijas, seeders, testi
+- `frontend/` - React + TypeScript lietotāja saskarne
+- `Konti.txt` - demo kontu e-pasti, paroles, lomas un statusi
 
-## Tehnoloģijas
+## Izmantotie Rīki Un Tehnoloģijas
 
-Backend: Uz Laravel 12 platformas bāzes izstrādāts API, izmantojot PHP 8.2, jaunāko versiju kā galveno programmēšanas valodu. API autentifikācija un lietotāju sesiju pārvaldīšanai tiek izmantots Laravel Sanctum, savukārt vienību testi tiek veikti ar PHPUnita palīdzību.
-Frontend - React 19 - lietotāja interfeiss - TypeScript - JavaScript ar tipa kontroles funkcionalitāti - Vite - ātrāka izstrādes un izvietošanas rīks - Axios - API pieprasījumu apstrāde - ESLint - koda pārbaude un kvalitātes uzlabošana
+- PHP 8.3+
+- Laravel
+- Composer
+- SQLite lokālai attīstībai un testiem
+- Node.js 20+
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS
+- Axios
+- ESLint
+- PHPUnit
 
-## Projekta struktūra
+## Funkcionalitāte
 
-frontend/ - React lietojums TypeScript valodā
-backend/  - Laravel API serveris
+- lietotāju autentifikācija un lomu sadalījums
+- administratora panelis
+- kontu un dalībnieku pārvaldība
+- transakciju izveide, rediģēšana, dzēšana un apstiprināšana
+- datu validācija un piekļuves kontrole
+- filtrēšana, meklēšana, kārtošana un statistika
+- PWA instalācija un offline atbalsta daļas
 
-Sistēma izstrādāta kā divslāņu arhitektūra, kur frontend komunicē ar backend API caur REST protokolu.
+## Palaišana Lokāli
 
-- Lietotāju autentifikācija, draudzīga lietotāja saskarne, API integrācija,  Datu validācija.
+### Backend
+
+```bash
+cd backend
+composer install
+php artisan migrate:fresh --seed
+php artisan serve --host=0.0.0.0 --port=8000
+```
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+## Pārbaudes Komandas
+
+```bash
+cd backend
+./vendor/bin/phpunit
+```
+
+```bash
+cd frontend
+npm run build
+npm run lint
+```
+
+## Demo Dati
+
+- Demo konti ir latviešu valodā.
+- Visiem demo kontiem 2FA ir atslēgts.
+- `Konti.txt` satur sākotnējos piekļuves datus.
+- Demo datubāzi var atjaunot ar `php artisan db:seed` backend mapē.
+
+## Pieejamība Un Drošība
+
+- Lietotāja saskarne ir veidota ar uzsvaru uz WCAG pieejamību.
+- Funkcijas ir sadalītas pēc lomām un aizsargātas ar autorizāciju.
+- Ievaddati tiek validēti gan frontenda, gan backenda pusē.
+
+## Piezīmes
+
+- Produkcijas kods atrodas tikai `backend/` un `frontend/` mapēs.
+- Nevajadzīgie frontend utilītu skripti ir noņemti.
+- Projekts darbojas lokāli ar SQLite bez ārēja datubāzes servera, ja izmanto šīs repozitorija noklusējuma konfigurāciju.

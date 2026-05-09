@@ -1,29 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* Cosmic Gray Palette - "Moon Base" Aesthetic */
-  --background: #F0F2F5;
-  --foreground: #1A1A1D;
-  
-  --color-text-primary: #1A1A1D;
-  --color-text-secondary: #6B7280;
-  --color-border: #E5E7EB;
-  --color-cosmic-dark: #1A1A1D;
-  --color-cosmic-gray: #4E4E50;
-  --color-cosmic-silver: #950740;
-  --color-cosmic-light: #F4F4F5;
+  --bank-base: #f4f7fb;
+  --bank-panel: #ffffff;
+  --bank-panel-soft: #eef3fb;
+  --bank-ink: #17283f;
+  --bank-muted: #5e728d;
+  --bank-border: #d9e3f0;
+  --bank-accent: #d8e7ff;
+  --bank-accent-strong: #1f5fd6;
+  --bank-cosmic: #1a56c5;
+  --bank-cosmic-soft: #2f6fdf;
+  --bank-ring: rgba(31, 95, 214, 0.35);
 
-  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --background: var(--bank-base);
+  --foreground: var(--bank-ink);
+  --card: var(--bank-panel);
+  --border: var(--bank-border);
+  --primary: var(--bank-cosmic);
+  --primary-foreground: #ffffff;
+  --secondary: var(--bank-panel-soft);
+  --muted-foreground: var(--bank-muted);
+
+  font-family: 'Manrope', 'Segoe UI', sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color-scheme: light;
-  --primary: #3b82f6;
-  --primary-foreground: #ffffff;
-  --secondary: #8b5cf6;
-  --muted-foreground: #6b7280;
-  
+
   color: var(--foreground);
   background-color: var(--background);
 
@@ -33,159 +39,262 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: 'Manrope', 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--background);
+  background: linear-gradient(180deg, #f8fafe 0%, #f2f6fc 100%);
   color: var(--foreground);
   overflow-x: hidden;
-  min-width: 320px;
+  overflow-y: scroll;
 }
 
-/* Subtle Grain for Texture */
-body::before {
-  content: "";
-  position: fixed;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/Noise.png");
-  opacity: 0.02;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--color-text-primary);
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+#root {
+  min-height: 100vh;
 }
 
 a {
-  font-weight: 500;
-  color: var(--primary);
-  text-decoration: inherit;
+  color: inherit;
+  text-decoration: none;
 }
 
-a:hover {
-  color: #535bf2;
+img {
+  display: block;
+  max-width: 100%;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
+button,
+input,
+select,
+textarea {
+  font: inherit;
 }
 
-button:hover {
-  border-color: #646cff;
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-}
-
-/* Cosmic Gradient Text - Muted & Elegant */
-.text-cosmic {
-  background: linear-gradient(135deg, 
-    #2E3192 0%, 
-    #1BFFFF 50%, 
-    #D4145A 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 200% auto;
-}
-
-/* Deep Space Gradient Text */
-.text-void {
-  background: linear-gradient(to right, #434343 0%, black 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* "Titanium" Card Style */
-.card-titanium {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 
-    0 4px 6px -1px rgba(0, 0, 0, 0.02), 
-    0 2px 4px -1px rgba(0, 0, 0, 0.02),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.6);
-  border-radius: 16px;
-}
-
-.card-titanium:hover {
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 
-    0 20px 25px -5px rgba(0, 0, 0, 0.05), 
-    0 10px 10px -5px rgba(0, 0, 0, 0.02);
-}
-
-/* Primary Button - "Cosmic Matter" */
-.btn-cosmic {
-  background: #1A1A1D; /* Deep Gray/Black */
-  color: #FFFFFF;
-  border: 1px solid transparent;
-  padding: 14px 28px;
-  font-weight: 600;
-  border-radius: 8px;
-  position: relative;
+select {
+  max-width: 100%;
   overflow: hidden;
-  z-index: 1;
-  cursor: pointer;
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:
+    calc(100% - 1.15rem) 52%,
+    calc(100% - 0.8rem) 52%;
+  background-size:
+    0.35rem 0.35rem,
+    0.35rem 0.35rem;
+  background-repeat: no-repeat;
+  padding-right: 2.45rem !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.btn-cosmic:hover {
-  background: #2D2D30;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+:focus-visible {
+  outline: 2px solid var(--bank-ring);
+  outline-offset: 2px;
 }
 
-/* Secondary Button */
-.btn-ghost {
-  background: transparent;
-  color: #1A1A1D;
-  border: 1px solid #D1D5DB;
-  padding: 14px 28px;
-  font-weight: 600;
-  border-radius: 8px;
-  cursor: pointer;
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.btn-ghost:hover {
-  background: #FFFFFF;
-  border-color: #9CA3AF;
+.animate-reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: reveal-up 0.45s ease-out forwards;
 }
 
-/* Aurora Background Blob */
-.aurora-blob {
-  position: absolute;
-  filter: blur(80px);
-  opacity: 0.4;
-  z-index: 0;
+@keyframes bank-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.bank-announcement {
+  border-top: 1px solid rgba(158, 175, 247, 0.92);
+  background: linear-gradient(92deg, #2d2b8f 0%, #5442c6 24%, #1a88d8 50%, #0ea4b5 74%, #8f3cd3 100%);
+  color: #eef8ff;
+  overflow: hidden;
+  min-height: 2.85rem;
+  box-shadow: 0 -8px 20px rgba(19, 32, 92, 0.32);
+}
+
+.bank-announcement-track {
+  display: flex;
+  min-width: max-content;
+  align-items: center;
+  gap: 2.6rem;
+  padding: 0.76rem 0;
+  font-size: 0.79rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  will-change: transform;
+  animation: bank-marquee 60s linear infinite;
+}
+
+.bank-announcement-track span {
+  opacity: 0.96;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bank-announcement-track {
+    animation-duration: 90s;
+  }
+}
+
+@media (max-width: 640px) {
+  .bank-announcement {
+    min-height: auto;
+  }
+
+  .bank-announcement-track {
+    min-width: max-content;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 1.4rem;
+    padding: 0.8rem 0.75rem;
+    white-space: nowrap;
+    animation: bank-marquee 48s linear infinite;
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+  }
+
+  .bank-announcement-track span {
+    white-space: nowrap;
+  }
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+  --bank-base: #0e1726;
+  --bank-panel: #142033;
+  --bank-panel-soft: #1b2a42;
+  --bank-ink: #edf4ff;
+  --bank-muted: #aebbd1;
+  --bank-border: #31415c;
+}
+
+[data-theme='dark'] body {
+  background: linear-gradient(180deg, #0e1726 0%, #111c2f 100%);
+}
+
+[data-theme='dark'] .bg-white,
+[data-theme='dark'] .bg-white\/95,
+[data-theme='dark'] .bg-bank-panel {
+  background-color: var(--bank-panel) !important;
+}
+
+[data-theme='dark'] .bg-gray-100 {
+  background-color: #1a273d !important;
+}
+
+[data-theme='dark'] .bg-amber-50,
+[data-theme='dark'] .bg-amber-50\/45,
+[data-theme='dark'] .bg-amber-50\/80 {
+  background-color: rgba(178, 122, 33, 0.14) !important;
+}
+
+[data-theme='dark'] .bg-rose-50,
+[data-theme='dark'] .bg-rose-50\/80 {
+  background-color: rgba(160, 62, 80, 0.14) !important;
+}
+
+[data-theme='dark'] .bg-green-50,
+[data-theme='dark'] .bg-green-50\/80 {
+  background-color: rgba(33, 97, 61, 0.14) !important;
+}
+
+[data-theme='dark'] .border-amber-200 {
+  border-color: rgba(219, 162, 68, 0.35) !important;
+}
+
+[data-theme='dark'] .border-rose-200 {
+  border-color: rgba(215, 104, 124, 0.35) !important;
+}
+
+[data-theme='dark'] .text-amber-700,
+[data-theme='dark'] .text-amber-800 {
+  color: #f7d48f !important;
+}
+
+[data-theme='dark'] .text-rose-700 {
+  color: #f0a4b3 !important;
+}
+
+[data-theme='dark'] .text-green-700,
+[data-theme='dark'] .text-emerald-700 {
+  color: #8cd8b0 !important;
+}
+
+[data-theme='dark'] .bg-bank-panel-soft,
+[data-theme='dark'] .bg-bank-panel-soft\/30,
+[data-theme='dark'] .bg-bank-panel-soft\/35,
+[data-theme='dark'] .bg-bank-panel-soft\/45,
+[data-theme='dark'] .bg-bank-panel-soft\/50,
+[data-theme='dark'] .bg-bank-panel-soft\/55,
+[data-theme='dark'] .bg-bank-panel-soft\/65 {
+  background-color: var(--bank-panel-soft) !important;
+}
+
+[data-theme='dark'] input,
+[data-theme='dark'] select,
+[data-theme='dark'] textarea {
+  background-color: var(--bank-panel-soft) !important;
+  color: var(--bank-ink) !important;
+  border-color: var(--bank-border) !important;
+}
+
+[data-theme='dark'] .text-slate-900,
+[data-theme='dark'] .text-bank-ink {
+  color: var(--bank-ink) !important;
+}
+
+[data-theme='dark'] .text-slate-600,
+[data-theme='dark'] .text-bank-muted {
+  color: var(--bank-muted) !important;
+}
+
+.bank-spot-light {
+  background: radial-gradient(circle at 72% 18%, rgba(152, 194, 255, 0.2), transparent 60%);
+}
+
+.bank-spot-cosmic {
+  background: radial-gradient(circle at 20% 80%, rgba(54, 94, 202, 0.2), transparent 62%);
+}
+
+.bank-compact .space-y-6 > * + * {
+  margin-top: 1rem;
+}
+
+.bank-compact .space-y-5 > * + * {
+  margin-top: 0.9rem;
+}
+
+.bank-compact .space-y-4 > * + * {
+  margin-top: 0.7rem;
 }

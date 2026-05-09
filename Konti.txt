@@ -1,0 +1,37 @@
+Saraksts ar demonstrācijas kontiem (emails, paroles, loma, statuss)
+
+Administrators:
+- admin@demo.lv : ParoleAdmin1! : admin : active
+
+Lietotāji (29):
+// Statusu cikls: active, blocked, pending, frozen
+
+user1@demo.lv : Parole1! : user : active
+user2@demo.lv : Parole2! : user : blocked
+user3@demo.lv : Parole3! : user : pending
+user4@demo.lv : Parole4! : user : frozen
+user5@demo.lv : Parole5! : user : active
+user6@demo.lv : Parole6! : user : blocked
+user7@demo.lv : Parole7! : user : pending
+user8@demo.lv : Parole8! : user : frozen
+user9@demo.lv : Parole9! : user : active
+user10@demo.lv : Parole10! : user : blocked
+user11@demo.lv : Parole11! : user : pending
+user12@demo.lv : Parole12! : user : frozen
+user13@demo.lv : Parole13! : user : active
+user14@demo.lv : Parole14! : user : blocked
+user15@demo.lv : Parole15! : user : pending
+user16@demo.lv : Parole16! : user : frozen
+user17@demo.lv : Parole17! : user : active
+user18@demo.lv : Parole18! : user : blocked
+user19@demo.lv : Parole19! : user : pending
+user20@demo.lv : Parole20! : user : frozen
+user21@demo.lv : Parole21! : user : active
+user22@demo.lv : Parole22! : user : blocked
+user23@demo.lv : Parole23! : user : pending
+user24@demo.lv : Parole24! : user : frozen
+user25@demo.lv : Parole25! : user : active
+user26@demo.lv : Parole26! : user : blocked
+user27@demo.lv : Parole27! : user : pending
+user28@demo.lv : Parole28! : user : frozen
+user29@demo.lv : Parole29! : user : active
