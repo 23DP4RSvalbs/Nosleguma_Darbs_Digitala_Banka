@@ -103,11 +103,9 @@ export function AuthPanel({
           <form onSubmit={onSubmit} className="mt-6 space-y-4">
             {authMode === 'register' ? (
               <>
-                <label htmlFor="register-name" className="block text-sm font-medium">
+                <label className="block text-sm font-medium">
                   Vārds un uzvārds
                   <input
-                    id="register-name"
-                    aria-label="Vārds un uzvārds"
                     value={registerData.name}
                     onChange={(event) => onRegisterDataChange((prev) => ({ ...prev, name: sanitizePersonName(event.target.value) }))}
                     required
@@ -119,11 +117,9 @@ export function AuthPanel({
                     className="mt-1 w-full rounded-md border border-bank-border bg-bank-panel px-3 py-2 text-bank-ink placeholder:text-bank-muted/85"
                   />
                 </label>
-                <label htmlFor="register-email" className="block text-sm font-medium">
+                <label className="block text-sm font-medium">
                   E-pasts
                   <input
-                    id="register-email"
-                    aria-label="Reģistrācijas e-pasts"
                     type="email"
                     value={registerData.email}
                     onChange={(event) => onRegisterDataChange((prev) => ({ ...prev, email: event.target.value }))}
@@ -133,11 +129,9 @@ export function AuthPanel({
                     className="mt-1 w-full rounded-md border border-bank-border bg-bank-panel px-3 py-2 text-bank-ink placeholder:text-bank-muted/85"
                   />
                 </label>
-                <label htmlFor="register-password" className="block text-sm font-medium">
+                <label className="block text-sm font-medium">
                   Parole
                   <input
-                    id="register-password"
-                    aria-label="Reģistrācijas parole"
                     type="password"
                     value={registerData.password}
                     onChange={(event) => onRegisterDataChange((prev) => ({ ...prev, password: event.target.value.slice(0, 128) }))}
@@ -148,14 +142,12 @@ export function AuthPanel({
                     title="Parolei jābūt vismaz 8 simbolus garai, ar vienu lielo burtu, vienu mazo burtu un vienu ciparu."
                     className="mt-1 w-full rounded-md border border-bank-border bg-bank-panel px-3 py-2 text-bank-ink placeholder:text-bank-muted/85"
                   />
-                  <span id="register-password-help" className="mt-1 block text-xs text-bank-muted">Vismaz 8 simboli, viens lielais burts, viens mazais burts un viens cipars.</span>
+                  <span className="mt-1 block text-xs text-bank-muted">Vismaz 8 simboli, viens lielais burts, viens mazais burts un viens cipars.</span>
                 </label>
 
-                <label htmlFor="register-password-confirm" className="block text-sm font-medium">
+                <label className="block text-sm font-medium">
                   Paroles apstiprinājums
                   <input
-                    id="register-password-confirm"
-                    aria-label="Paroles apstiprinājums"
                     type="password"
                     value={registerData.password_confirmation}
                     onChange={(event) =>
@@ -170,11 +162,9 @@ export function AuthPanel({
               </>
             ) : (
               <>
-                <label htmlFor="login-email" className="block text-sm font-medium">
+                <label className="block text-sm font-medium">
                   E-pasts
                   <input
-                    id="login-email"
-                    aria-label="Ielogoties e-pasts"
                     type="email"
                     value={loginData.email}
                     onChange={(event) => onLoginDataChange((prev) => ({ ...prev, email: event.target.value }))}
@@ -184,11 +174,9 @@ export function AuthPanel({
                     className="mt-1 w-full rounded-md border border-bank-border bg-bank-panel px-3 py-2 text-bank-ink placeholder:text-bank-muted/85"
                   />
                 </label>
-                <label htmlFor="login-password" className="block text-sm font-medium">
+                <label className="block text-sm font-medium">
                   Parole
                   <input
-                    id="login-password"
-                    aria-label="Ielogoties parole"
                     type="password"
                     value={loginData.password}
                     onChange={(event) => onLoginDataChange((prev) => ({ ...prev, password: event.target.value }))}

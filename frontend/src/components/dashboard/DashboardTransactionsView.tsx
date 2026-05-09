@@ -310,12 +310,10 @@ export function DashboardTransactionsView({
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px]">
             <form onSubmit={handleCreateTransaction} className="space-y-3">
               <div className="grid gap-3 sm:grid-cols-2">
-                <label htmlFor="tx-from-account" className="block text-xs font-semibold uppercase text-bank-muted">
+                <label className="block text-xs font-semibold uppercase text-bank-muted">
                   No konta
                   <select
                     required
-                    id="tx-from-account"
-                    aria-label="No konta"
                     value={transferForm.from_account_id}
                     onChange={(event) =>
                       setTransferForm((prev) => ({ ...prev, from_account_id: event.target.value }))
@@ -331,14 +329,12 @@ export function DashboardTransactionsView({
                   </select>
                 </label>
 
-                <label htmlFor="tx-recipient" className="block text-xs font-semibold uppercase text-bank-muted">
+                <label className="block text-xs font-semibold uppercase text-bank-muted">
                   Saņēmēja konta numurs (IBAN)
                   <input
                     required
                     type="text"
                     maxLength={34}
-                    id="tx-recipient"
-                    aria-label="Saņēmēja konta numurs"
                     value={transferForm.recipient_query}
                     onChange={(event) => {
                       const normalizedNextQuery = normalizeIban(event.target.value);
@@ -364,14 +360,12 @@ export function DashboardTransactionsView({
               </div>
 
               <div className="grid gap-3 sm:grid-cols-2">
-                <label htmlFor="tx-amount" className="block text-xs font-semibold uppercase text-bank-muted">
+                <label className="block text-xs font-semibold uppercase text-bank-muted">
                   Summa
                   <input
                     required
                     type="text"
                     inputMode="decimal"
-                    id="tx-amount"
-                    aria-label="Summa"
                     value={transferForm.amount}
                     onKeyDown={(event) => {
                       if (['e', 'E', '+', '-'].includes(event.key)) {
@@ -405,11 +399,9 @@ export function DashboardTransactionsView({
                   />
                 </label>
 
-                <label htmlFor="tx-category" className="block text-xs font-semibold uppercase text-bank-muted">
+                <label className="block text-xs font-semibold uppercase text-bank-muted">
                   Kategorija
                   <select
-                    id="tx-category"
-                    aria-label="Kategorija"
                     value={transferForm.category}
                     onChange={(event) =>
                       setTransferForm((prev) => ({
@@ -428,11 +420,9 @@ export function DashboardTransactionsView({
                 </label>
               </div>
 
-              <label htmlFor="tx-description" className="block text-xs font-semibold uppercase text-bank-muted">
+              <label className="block text-xs font-semibold uppercase text-bank-muted">
                 Apraksts
                 <textarea
-                  id="tx-description"
-                  aria-label="Apraksts"
                   value={transferForm.description}
                   onChange={(event) =>
                     setTransferForm((prev) => ({ ...prev, description: sanitizePlainText(event.target.value, 240) }))
@@ -498,11 +488,9 @@ export function DashboardTransactionsView({
             <article className="mb-4 rounded-xl border border-bank-border bg-bank-panel-soft/55 p-4">
               <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-bank-muted">Filtri un kārtošana</h3>
               <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-6">
-                <label htmlFor="tx-filter-q" className="text-xs font-semibold uppercase text-bank-muted">
+                <label className="text-xs font-semibold uppercase text-bank-muted">
                   Meklēšana
                   <input
-                    id="tx-filter-q"
-                    aria-label="Meklēšana"
                     maxLength={120}
                     value={transactionFiltersDraft.q}
                     onChange={(event) =>
@@ -512,11 +500,9 @@ export function DashboardTransactionsView({
                   />
                 </label>
 
-                <label htmlFor="tx-filter-account" className="text-xs font-semibold uppercase text-bank-muted">
+                <label className="text-xs font-semibold uppercase text-bank-muted">
                   Konts
                   <select
-                    id="tx-filter-account"
-                    aria-label="Konts"
                     value={transactionFiltersDraft.account_id}
                     onChange={(event) =>
                       setTransactionFiltersDraft((prev) => ({ ...prev, account_id: event.target.value }))
@@ -534,11 +520,9 @@ export function DashboardTransactionsView({
                   </select>
                 </label>
 
-                <label htmlFor="tx-filter-status" className="text-xs font-semibold uppercase text-bank-muted">
+                <label className="text-xs font-semibold uppercase text-bank-muted">
                   Statuss
                   <select
-                    id="tx-filter-status"
-                    aria-label="Statuss"
                     value={transactionFiltersDraft.status}
                     onChange={(event) =>
                       setTransactionFiltersDraft((prev) => ({
@@ -556,11 +540,9 @@ export function DashboardTransactionsView({
                   </select>
                 </label>
 
-                <label htmlFor="tx-filter-category" className="text-xs font-semibold uppercase text-bank-muted">
+                <label className="text-xs font-semibold uppercase text-bank-muted">
                   Kategorija
                   <select
-                    id="tx-filter-category"
-                    aria-label="Kategorija"
                     value={transactionFiltersDraft.category}
                     onChange={(event) =>
                       setTransactionFiltersDraft((prev) => ({
@@ -579,11 +561,9 @@ export function DashboardTransactionsView({
                   </select>
                 </label>
 
-                <label htmlFor="tx-filter-sort-by" className="text-xs font-semibold uppercase text-bank-muted">
+                <label className="text-xs font-semibold uppercase text-bank-muted">
                   Kārtot pēc
                   <select
-                    id="tx-filter-sort-by"
-                    aria-label="Kārtot pēc"
                     value={transactionFiltersDraft.sort_by}
                     onChange={(event) =>
                       setTransactionFiltersDraft((prev) => ({
@@ -600,11 +580,9 @@ export function DashboardTransactionsView({
                   </select>
                 </label>
 
-                <label htmlFor="tx-filter-sort-dir" className="text-xs font-semibold uppercase text-bank-muted">
+                <label className="text-xs font-semibold uppercase text-bank-muted">
                   Kārtošanas virziens
                   <select
-                    id="tx-filter-sort-dir"
-                    aria-label="Kārtošanas virziens"
                     value={transactionFiltersDraft.sort_dir}
                     onChange={(event) =>
                       setTransactionFiltersDraft((prev) => ({
@@ -619,11 +597,9 @@ export function DashboardTransactionsView({
                   </select>
                 </label>
 
-                <label htmlFor="tx-filter-amount-min" className="text-xs font-semibold uppercase text-bank-muted">
+                <label className="text-xs font-semibold uppercase text-bank-muted">
                   Min summa
                   <input
-                    id="tx-filter-amount-min"
-                    aria-label="Min summa"
                     type="number"
                     min="0"
                     max="999999999.99"
@@ -635,11 +611,9 @@ export function DashboardTransactionsView({
                   />
                 </label>
 
-                <label htmlFor="tx-filter-amount-max" className="text-xs font-semibold uppercase text-bank-muted">
+                <label className="text-xs font-semibold uppercase text-bank-muted">
                   Max summa
                   <input
-                    id="tx-filter-amount-max"
-                    aria-label="Max summa"
                     type="number"
                     min="0"
                     max="999999999.99"
@@ -651,11 +625,9 @@ export function DashboardTransactionsView({
                   />
                 </label>
 
-                <label htmlFor="tx-filter-date-from" className="text-xs font-semibold uppercase text-bank-muted">
+                <label className="text-xs font-semibold uppercase text-bank-muted">
                   No datuma
                   <input
-                    id="tx-filter-date-from"
-                    aria-label="No datuma"
                     type="date"
                     value={transactionFiltersDraft.date_from}
                     onChange={(event) =>
@@ -665,11 +637,9 @@ export function DashboardTransactionsView({
                   />
                 </label>
 
-                <label htmlFor="tx-filter-date-to" className="text-xs font-semibold uppercase text-bank-muted">
+                <label className="text-xs font-semibold uppercase text-bank-muted">
                   Līdz datumam
                   <input
-                    id="tx-filter-date-to"
-                    aria-label="Līdz datumam"
                     type="date"
                     value={transactionFiltersDraft.date_to}
                     onChange={(event) =>
@@ -832,11 +802,9 @@ export function DashboardTransactionsView({
             </div>
 
             <form onSubmit={handleEditSubmit} className="space-y-3">
-              <label htmlFor="tx-edit-category" className="block text-xs font-semibold uppercase tracking-wider text-bank-muted">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-bank-muted">
                 Kategorija
                 <select
-                  id="tx-edit-category"
-                  aria-label="Kategorija"
                   value={editCategory}
                   onChange={(event) => setEditCategory(event.target.value as TransactionCategory)}
                   className="mt-1 w-full rounded-lg border border-bank-border bg-bank-panel-soft px-3 py-2 text-sm"
@@ -849,11 +817,9 @@ export function DashboardTransactionsView({
                 </select>
               </label>
 
-              <label htmlFor="tx-edit-description" className="block text-xs font-semibold uppercase tracking-wider text-bank-muted">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-bank-muted">
                 Apraksts
                 <textarea
-                  id="tx-edit-description"
-                  aria-label="Apraksts"
                   value={editDescription}
                   onChange={(event) => setEditDescription(sanitizePlainText(event.target.value, 240))}
                   maxLength={240}

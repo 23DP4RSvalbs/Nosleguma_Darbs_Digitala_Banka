@@ -220,15 +220,10 @@ export function ContactPage({
             Aizpildi visus laukus precīzi. Neatbilstoši simboli netiks pieņemti.
           </p>
 
-          <form onSubmit={handleSubmit} className="mt-4 space-y-3" aria-labelledby="contact-form-heading">
-            <h3 id="contact-form-heading" className="sr-only">Kontakta forma</h3>
-            <label htmlFor="contact-name" className="block text-sm font-medium">
+          <form onSubmit={handleSubmit} className="mt-4 space-y-3">
+            <label className="block text-sm font-medium">
               Vārds
               <input
-                id="contact-name"
-                aria-label="Vārds"
-                aria-invalid={formErrors.name ? 'true' : 'false'}
-                aria-describedby={formErrors.name ? 'contact-name-error' : 'contact-name-help'}
                 value={formState.name}
                 onChange={(event) => handleNameChange(event.target.value)}
                 placeholder="Piemērs: Elīna Ozola"
@@ -239,19 +234,12 @@ export function ContactPage({
                   formErrors.name ? 'border-red-300' : 'border-bank-border'
                 }`}
               />
-              <span id="contact-name-help" className="mt-1 block text-xs text-bank-muted">Atļauti tikai burti, atstarpes, apostrofs un domuzīme.</span>
-              {formErrors.name ? (
-                <p id="contact-name-error" className="mt-1 text-xs text-rose-700">{formErrors.name}</p>
-              ) : null}
+              <span className="mt-1 block text-xs text-bank-muted">Atļauti tikai burti, atstarpes, apostrofs un domuzīme.</span>
             </label>
 
-            <label htmlFor="contact-email" className="block text-sm font-medium">
+            <label className="block text-sm font-medium">
               E-pasts
               <input
-                id="contact-email"
-                aria-label="E-pasts"
-                aria-invalid={formErrors.email ? 'true' : 'false'}
-                aria-describedby={formErrors.email ? 'contact-email-error' : undefined}
                 type="email"
                 value={formState.email}
                 onChange={(event) => handleEmailChange(event.target.value)}
@@ -263,16 +251,11 @@ export function ContactPage({
                   formErrors.email ? 'border-red-300' : 'border-bank-border'
                 }`}
               />
-              {formErrors.email ? (
-                <p id="contact-email-error" className="mt-1 text-xs text-rose-700">{formErrors.email}</p>
-              ) : null}
             </label>
 
-            <label htmlFor="contact-topic" className="block text-sm font-medium">
+            <label className="block text-sm font-medium">
               Tēma
               <select
-                id="contact-topic"
-                aria-label="Tēma"
                 value={formState.topic}
                 onChange={(event) => setFormState((prev) => ({ ...prev, topic: event.target.value }))}
                 className="mt-1 w-full border border-bank-border bg-bank-panel px-3 py-2"
@@ -284,13 +267,9 @@ export function ContactPage({
               </select>
             </label>
 
-            <label htmlFor="contact-message" className="block text-sm font-medium">
+            <label className="block text-sm font-medium">
               Ziņa
               <textarea
-                id="contact-message"
-                aria-label="Ziņa"
-                aria-invalid={formErrors.message ? 'true' : 'false'}
-                aria-describedby={formErrors.message ? 'contact-message-error' : 'contact-message-help'}
                 value={formState.message}
                 onChange={(event) => handleMessageChange(event.target.value)}
                 placeholder="Piemērs: Vēlos precizēt, kā iestatīt ikdienas maksājumu limitu internetbankā."
@@ -301,15 +280,12 @@ export function ContactPage({
                   formErrors.message ? 'border-red-300' : 'border-bank-border'
                 }`}
               />
-              <div id="contact-message-help" className="mt-1 flex items-center justify-between text-xs">
+              <div className="mt-1 flex items-center justify-between text-xs">
                 <span className="text-bank-muted">Minimālais garums: 20 simboli. Maksimums: 500.</span>
                 <span className={remainingCharacters <= 40 ? 'text-bank-cosmic font-semibold' : 'text-bank-muted'}>
                   Atlikuši {remainingCharacters}
                 </span>
               </div>
-              {formErrors.message ? (
-                <p id="contact-message-error" className="mt-1 text-xs text-rose-700">{formErrors.message}</p>
-              ) : null}
             </label>
 
             <button

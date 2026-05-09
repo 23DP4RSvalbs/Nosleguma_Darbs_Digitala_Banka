@@ -41,18 +41,18 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/notifications/{notification}', [NotificationController::class, 'show']);
     Route::patch('/notifications/{notification}/read', [NotificationController::class, 'markRead'])->middleware('throttle:api-write');
     Route::post('/notifications/read-all', [NotificationController::class, 'markAllRead'])->middleware('throttle:api-write');
-    Route::apiResource('accounts', AccountController::class)->middleware(['throttle:accounts-write', 'banking.ready']);
+    Route::apiResource('accounts', AccountController::class)->middleware(['throttle:api-write', 'banking.ready']);
     Route::get('/accounts/{account}/members/candidates', [AccountMemberController::class, 'candidates'])->middleware('banking.ready');
     Route::get('/accounts/{account}/members', [AccountMemberController::class, 'index'])->middleware('banking.ready');
-    Route::post('/accounts/{account}/members', [AccountMemberController::class, 'store'])->middleware(['throttle:accounts-write', 'banking.ready']);
-    Route::put('/accounts/{account}/members/{member}', [AccountMemberController::class, 'update'])->middleware(['throttle:accounts-write', 'banking.ready']);
-    Route::patch('/accounts/{account}/members/{member}', [AccountMemberController::class, 'update'])->middleware(['throttle:accounts-write', 'banking.ready']);
-    Route::delete('/accounts/{account}/members/{member}', [AccountMemberController::class, 'destroy'])->middleware(['throttle:accounts-write', 'banking.ready']);
+    Route::post('/accounts/{account}/members', [AccountMemberController::class, 'store'])->middleware(['throttle:api-write', 'banking.ready']);
+    Route::put('/accounts/{account}/members/{member}', [AccountMemberController::class, 'update'])->middleware(['throttle:api-write', 'banking.ready']);
+    Route::patch('/accounts/{account}/members/{member}', [AccountMemberController::class, 'update'])->middleware(['throttle:api-write', 'banking.ready']);
+    Route::delete('/accounts/{account}/members/{member}', [AccountMemberController::class, 'destroy'])->middleware(['throttle:api-write', 'banking.ready']);
     Route::get('/transactions/stats', [TransactionController::class, 'stats'])->middleware('banking.ready');
     Route::get('/transactions/recipients', [TransactionController::class, 'recipients'])->middleware('banking.ready');
-    Route::post('/transactions/{transaction}/approve', [TransactionController::class, 'approve'])->middleware(['throttle:approvals-action', 'banking.ready']);
-    Route::post('/transactions/{transaction}/reject', [TransactionController::class, 'reject'])->middleware(['throttle:approvals-action', 'banking.ready']);
-    Route::apiResource('transactions', TransactionController::class)->middleware(['throttle:transactions-write', 'banking.ready']);
+    Route::post('/transactions/{transaction}/approve', [TransactionController::class, 'approve'])->middleware(['throttle:transaction-action', 'banking.ready']);
+    Route::post('/transactions/{transaction}/reject', [TransactionController::class, 'reject'])->middleware(['throttle:transaction-action', 'banking.ready']);
+    Route::apiResource('transactions', TransactionController::class)->middleware(['throttle:api-write', 'banking.ready']);
 
     Route::get('/auth/heartbeat', function (Request $request) {
         return response()->json([
