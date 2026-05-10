@@ -1035,17 +1035,6 @@ function App() {
       const response = await api.get<{ user: AuthUser }>('/auth/me');
       const sessionUser = response.data.user;
 
-      if (!sessionUser.two_factor_enabled) {
-        const setupResponse = await api.post<{ two_factor_setup: TwoFactorSetupPayload }>('/auth/2fa/setup');
-        setTwoFactorSetupSession({
-          email: sessionUser.email,
-          setup: setupResponse.data.two_factor_setup,
-        });
-        setTwoFactorChallengeSession(null);
-        setUser(null);
-        return;
-      }
-
       setTwoFactorSetupSession(null);
       setTwoFactorChallengeSession(null);
       setUser(sessionUser);
