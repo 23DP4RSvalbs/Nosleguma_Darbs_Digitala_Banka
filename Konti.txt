@@ -35,35 +35,3 @@ user26@demo.lv : Parole26! : user : blocked
 user27@demo.lv : Parole27! : user : pending
 user28@demo.lv : Parole28! : user : frozen
 user29@demo.lv : Parole29! : user : active
-
-
-- admin@demo.lv,ZHUNHOGBULGIBN4T
-user1@demo.lv,4KFQTWWDGEJX45PS
-user2@demo.lv,5UIU6VDR2ULYQGI2
-user3@demo.lv,TIDYGQVUJGL6DSAV
-user4@demo.lv,DBN2IOZYLT3RGR3B
-user5@demo.lv,GP65B6XS4XHZHPCZ
-user6@demo.lv,FDU6PB266ZAGNQ7R
-user7@demo.lv,ICABKKKSX47SEUKX
-user8@demo.lv,IUKZOBV6DBSOXXAT
-user9@demo.lv,S5UJ67FFYNFQVM4K
-user10@demo.lv,737ZBWNHCPRWAVCD
-user11@demo.lv,PWARDEWJTNOH4SJK
-user12@demo.lv,OCWFK43A4GZ5C55B
-user13@demo.lv,7M2LDKIR2TZ4MVLK
-user14@demo.lv,UYRJUSHEZ6R73KWZ
-user15@demo.lv,GWEW6IDAY6EI2WI4
-user16@demo.lv,ZWPIU3ZPFICUC7B2
-user17@demo.lv,4LALPJMKCJK3ALFG
-user18@demo.lv,MCSBKMEJEBIJJS42
-user19@demo.lv,QWULCVL56AEEY56S
-user20@demo.lv,GZBWWKNYJOKA23AW
-user21@demo.lv,SCI4OMHHTTTEGZTW
-user22@demo.lv,HW7MWX4L246B23ZP
-user23@demo.lv,QWRBGCS43KMLMG4I
-user24@demo.lv,JW6EGUSYRVHASSLM
-user25@demo.lv,2PJRH6FAXRYW65P4
-user26@demo.lv,RGNFQLGRQWNPD45W
-user27@demo.lv,K3LO5KN2MH6Y23Z4
-user28@demo.lv,FYO55W5VWGD4KO43
-user29@demo.lv,I23UC6VSD4JOPDUC

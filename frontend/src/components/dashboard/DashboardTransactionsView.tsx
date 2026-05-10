@@ -57,6 +57,7 @@ interface DashboardTransactionsViewProps {
 
   transactionsPageData: PaginatedResponse<Transaction> | null;
   initialSection?: TransactionSection;
+  exportTransactions: () => Promise<void>;
 }
 
 type TransactionSection = 'history' | 'payment' | 'approvals';
@@ -114,10 +115,12 @@ export function DashboardTransactionsView({
   editTransaction,
   deleteTransaction,
   transactionsPageData,
+  exportTransactions,
   initialSection = 'history',
 }: DashboardTransactionsViewProps) {
   const [activeSection, setActiveSection] = useState<TransactionSection>(initialSection);
   const [showHistoryFilters, setShowHistoryFilters] = useState(false);
+  const [exportLoading, setExportLoading] = useState(false);
 
   const transferAmount = Number(transferForm.amount || 0);
   const calculatedFee =
@@ -476,12 +479,28 @@ export function DashboardTransactionsView({
           <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-bank-muted">Transakciju vēsture</h3>
 
-            <button
-              onClick={() => setShowHistoryFilters((prev) => !prev)}
-              className="rounded-md border border-bank-border px-2.5 py-1.5 text-xs font-semibold text-bank-ink hover:bg-bank-panel-soft"
-            >
-              {showHistoryFilters ? 'Paslēpt filtrus' : 'Rādīt filtrus'}
-            </button>
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={() => setShowHistoryFilters((prev) => !prev)}
+                className="rounded-md border border-bank-border px-2.5 py-1.5 text-xs font-semibold text-bank-ink hover:bg-bank-panel-soft"
+              >
+                {showHistoryFilters ? 'Paslēpt filtrus' : 'Rādīt filtrus'}
+              </button>
+              <button
+                onClick={async () => {
+                  setExportLoading(true);
+                  try {
+                    await exportTransactions();
+                  } finally {
+                    setExportLoading(false);
+                  }
+                }}
+                disabled={transactionsLoading || exportLoading}
+                className="rounded-md border border-bank-border px-2.5 py-1.5 text-xs font-semibold text-bank-ink hover:bg-bank-panel-soft disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {exportLoading ? 'Eksportē...' : 'Lejupielādēt CSV'}
+              </button>
+            </div>
           </div>
 
           {showHistoryFilters && (

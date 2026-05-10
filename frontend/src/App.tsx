@@ -135,6 +135,94 @@ function formatDate(
   return `${renderedDate} ${hour}:${minute}`;
 }
 
+function csvCell(value: string | number | null | undefined): string {
+  const normalized = value === null || value === undefined ? '' : String(value);
+  return `"${normalized.replace(/"/g, '""')}"`;
+}
+
+function buildTransactionParams(
+  filters: TransactionFilterState,
+  page: number,
+  perPage: number
+): Record<string, string | number> {
+  const params: Record<string, string | number> = {
+    page,
+    per_page: perPage,
+    sort_by: filters.sort_by,
+    sort_dir: filters.sort_dir,
+  };
+
+  if (filters.q) params.q = filters.q;
+  if (filters.account_id) params.account_id = filters.account_id;
+  if (filters.status) params.status = filters.status;
+  if (filters.category) params.category = filters.category;
+  if (filters.amount_min) params.amount_min = filters.amount_min;
+  if (filters.amount_max) params.amount_max = filters.amount_max;
+  if (filters.date_from) params.date_from = filters.date_from;
+  if (filters.date_to) params.date_to = filters.date_to;
+
+  return params;
+}
+
+function transactionAccountLabel(accountMap: Map<number, Account>, accountId: number, iban?: string): string {
+  return accountMap.get(accountId)?.name ?? iban ?? String(accountId);
+}
+
+function buildTransactionCsv(transactions: Transaction[], accountMap: Map<number, Account>): string {
+  const headers = [
+    'Ref',
+    'Izveidots',
+    'Izpildīts',
+    'No konta',
+    'No IBAN',
+    'Uz kontu',
+    'Uz IBAN',
+    'Summa',
+    'Komisija',
+    'Valūta',
+    'Kategorija',
+    'Statuss',
+    'Apraksts',
+    'Iniciators',
+  ];
+
+  const rows = transactions.map((tx) => [
+    tx.reference,
+    tx.created_at,
+    tx.executed_at ?? '',
+    transactionAccountLabel(accountMap, tx.from_account_id, tx.from_iban),
+    tx.from_iban ?? '',
+    transactionAccountLabel(accountMap, tx.to_account_id, tx.to_iban),
+    tx.to_iban ?? '',
+    tx.amount,
+    tx.fee,
+    tx.currency,
+    tx.category,
+    tx.status,
+    tx.description ?? '',
+    tx.initiator_name ?? tx.initiator_user_id ?? '',
+  ]);
+
+  return [headers, ...rows]
+    .map((row) => row.map(csvCell).join(','))
+    .join('\n');
+}
+
+function downloadTextFile(content: string, filename: string): void {
+  const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+
+  link.href = url;
+  link.download = filename;
+  link.style.display = 'none';
+
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 0);
+}
+
 function isValidPersonName(value: string): boolean {
   return PERSON_NAME_PATTERN.test(value.trim().replace(/\s+/g, ' '));
 }
@@ -1112,23 +1200,9 @@ function App() {
     setTransactionsError(null);
 
     try {
-      const params: Record<string, string | number> = {
-        page: transactionPage,
-        per_page: 30,
-        sort_by: transactionFilters.sort_by,
-        sort_dir: transactionFilters.sort_dir,
-      };
-
-      if (transactionFilters.q) params.q = transactionFilters.q;
-      if (transactionFilters.account_id) params.account_id = transactionFilters.account_id;
-      if (transactionFilters.status) params.status = transactionFilters.status;
-      if (transactionFilters.category) params.category = transactionFilters.category;
-      if (transactionFilters.amount_min) params.amount_min = transactionFilters.amount_min;
-      if (transactionFilters.amount_max) params.amount_max = transactionFilters.amount_max;
-      if (transactionFilters.date_from) params.date_from = transactionFilters.date_from;
-      if (transactionFilters.date_to) params.date_to = transactionFilters.date_to;
-
-      const response = await api.get<PaginatedResponse<Transaction>>('/transactions', { params });
+      const response = await api.get<PaginatedResponse<Transaction>>('/transactions', {
+        params: buildTransactionParams(transactionFilters, transactionPage, 30),
+      });
       setTransactionsPageData(response.data);
     } catch (error) {
       setTransactionsError(extractApiError(error, 'Neizdevās ielādēt transakcijas.'));
@@ -1136,6 +1210,41 @@ function App() {
       setTransactionsLoading(false);
     }
   }, [transactionFilters, transactionPage, user]);
+
+  const exportTransactions = useCallback(async () => {
+    if (!user) {
+      return;
+    }
+
+    try {
+      const perPage = 100;
+      let page = 1;
+      let lastPage = 1;
+      const allTransactions: Transaction[] = [];
+
+      do {
+        const response = await api.get<PaginatedResponse<Transaction>>('/transactions', {
+          params: buildTransactionParams(transactionFilters, page, perPage),
+        });
+
+        allTransactions.push(...response.data.data);
+        lastPage = response.data.last_page;
+        page += 1;
+      } while (page <= lastPage);
+
+      if (allTransactions.length === 0) {
+        pushToast('error', 'Transakcijas eksportam netika atrastas.');
+        return;
+      }
+
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+      const csvContent = buildTransactionCsv(allTransactions, accountMap);
+      downloadTextFile(csvContent, `transactions-export-${timestamp}.csv`);
+      pushToast('success', `Eksportētas ${allTransactions.length} transakcijas CSV failā.`);
+    } catch {
+      pushToast('error', 'Neizdevās eksportēt transakcijas.');
+    }
+  }, [accountMap, pushToast, transactionFilters, user]);
 
   const fetchTransferRecipients = useCallback(async () => {
     if (!user) {
@@ -2913,6 +3022,7 @@ function App() {
               editTransaction={editTransaction}
               deleteTransaction={deleteTransaction}
               transactionsPageData={transactionsPageData}
+              exportTransactions={exportTransactions}
               initialSection={transactionsInitialSection}
             />
           )}
