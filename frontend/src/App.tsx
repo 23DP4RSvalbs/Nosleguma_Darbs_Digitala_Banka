@@ -2877,6 +2877,13 @@ function App() {
 
   return (
     <div className={`min-h-screen bg-bank-base text-bank-ink font-body ${user.compact_mode ? 'bank-compact' : ''}`}>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-5 focus:top-5 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-bank-ink focus:shadow-lg"
+      >
+        Pāriet uz galveno saturu
+      </a>
+
       <DashboardTopBar
         userName={user.name}
         profilePicture={resolvePublicAssetUrl(user.profile_picture)}
@@ -2909,7 +2916,7 @@ function App() {
           statusSummary={sidebarStatusSummary}
         />
 
-        <main className="min-w-0 space-y-5">
+        <main id="main-content" tabIndex={-1} className="min-w-0 space-y-5">
           {activeView === 'overview' && (
             <DashboardOverview
               statsLoading={statsLoading}

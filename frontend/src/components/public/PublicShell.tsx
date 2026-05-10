@@ -103,6 +103,13 @@ export function PublicShell({
 
   return (
     <div className="min-h-screen bg-bank-base pb-14 font-body text-bank-ink">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-5 focus:top-5 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-bank-ink focus:shadow-lg"
+      >
+        Pāriet uz galveno saturu
+      </a>
+
       <header className="sticky top-0 z-30 border-b border-bank-border bg-white">
         <div className="mx-auto max-w-[1180px] px-5 py-4 sm:px-6">
           <div ref={headerRowRef} className="relative">
@@ -228,7 +235,9 @@ export function PublicShell({
         </div>
       </header>
 
-      <main className="mx-auto max-w-[1180px] px-5 py-10 sm:px-6 md:py-14">{children}</main>
+      <main id="main-content" tabIndex={-1} className="mx-auto max-w-[1180px] px-5 py-10 sm:px-6 md:py-14">
+        {children}
+      </main>
 
       <footer className="mt-10 border-t border-bank-border/85 bg-bank-panel/90 backdrop-blur-xl">
         <div className="mx-auto grid max-w-[1180px] gap-8 px-5 py-10 sm:px-6 md:grid-cols-3">

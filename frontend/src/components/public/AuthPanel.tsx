@@ -41,7 +41,14 @@ export function AuthPanel({
   onSubmit,
 }: AuthPanelProps) {
   return (
-    <div className="min-h-screen bg-bank-base font-body text-bank-ink">
+    <main id="main-content" tabIndex={-1} className="min-h-screen bg-bank-base font-body text-bank-ink">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-5 focus:top-5 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-bank-ink focus:shadow-lg"
+      >
+        Pāriet uz galveno saturu
+      </a>
+
       {authError && (
         <div className="pointer-events-none fixed left-1/2 top-4 z-[110] w-[min(560px,calc(100vw-1.5rem))] -translate-x-1/2">
           <div className="pointer-events-auto rounded-lg border border-red-200 border-l-4 border-l-red-500 bg-white px-3 py-2.5 text-sm text-red-700 shadow-[0_12px_32px_rgba(17,34,64,0.14)]">
@@ -199,6 +206,6 @@ export function AuthPanel({
           </form>
         </section>
       </div>
-    </div>
+    </main>
   );
 }
