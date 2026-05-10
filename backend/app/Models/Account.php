@@ -19,6 +19,12 @@ class Account extends Model
         'currency',
         'balance',
         'type',
+        'company_name',
+        'registration_number',
+        'vat_number',
+        'first_name',
+        'last_name',
+        'personal_code',
         'status',
     ];
 

@@ -523,6 +523,12 @@ function App() {
     name: '',
     currency: 'EUR',
     type: 'personal',
+    company_name: '',
+    registration_number: '',
+    vat_number: '',
+    first_name: '',
+    last_name: '',
+    personal_code: '',
   });
   const [createAccountLoading, setCreateAccountLoading] = useState(false);
   const [memberPanelAccountId, setMemberPanelAccountId] = useState<number | null>(null);
@@ -2051,14 +2057,40 @@ function App() {
     setCreateAccountLoading(true);
     setAccountsError(null);
 
+    const accountDetails =
+      newAccount.type === 'business'
+        ? {
+            company_name: newAccount.company_name,
+            registration_number: newAccount.registration_number,
+            vat_number: newAccount.vat_number,
+          }
+        : newAccount.type === 'savings'
+          ? {
+              first_name: newAccount.first_name,
+              last_name: newAccount.last_name,
+              personal_code: newAccount.personal_code,
+            }
+          : {};
+
     try {
       await api.post('/accounts', {
         name: newAccount.name,
         currency: newAccount.currency.toUpperCase(),
         type: newAccount.type,
+        ...accountDetails,
       });
 
-      setNewAccount({ name: '', currency: 'EUR', type: 'personal' });
+      setNewAccount({
+        name: '',
+        currency: 'EUR',
+        type: 'personal',
+        company_name: '',
+        registration_number: '',
+        vat_number: '',
+        first_name: '',
+        last_name: '',
+        personal_code: '',
+      });
       await Promise.all([fetchAccounts(), fetchTransferRecipients(), fetchStats(), fetchAdminMetrics()]);
     } catch (error) {
       setAccountsError(extractApiError(error, 'Neizdevās izveidot kontu.'));

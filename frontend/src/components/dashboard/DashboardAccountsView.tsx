@@ -13,7 +13,14 @@ import type {
   NewMemberState,
   PaginatedResponse,
 } from '../../lib/domain-types';
-import { sanitizeAccountName } from '../../lib/validation';
+import {
+  sanitizeAccountName,
+  sanitizeCompanyName,
+  sanitizeNamePart,
+  sanitizePersonalCode,
+  sanitizeRegistrationNumber,
+  sanitizeVatNumber,
+} from '../../lib/validation';
 
 interface DashboardAccountsViewProps {
   accountFiltersDraft: AccountFilterState;
@@ -459,7 +466,7 @@ export function DashboardAccountsView({
         <article className="rounded-xl bg-white p-4">
           <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-bank-muted">Jauns konts</h3>
 
-          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_300px]">
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start">
             <form onSubmit={handleCreateAccount} className="space-y-3">
               <label className="block text-xs font-semibold uppercase text-bank-muted">
                 Nosaukums
@@ -511,6 +518,114 @@ export function DashboardAccountsView({
                 </label>
               </div>
 
+              {newAccount.type === 'business' && (
+                <div className="space-y-3 rounded-lg border border-bank-border bg-bank-panel-soft/55 p-3">
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-bank-muted">Uzņēmuma dati</p>
+
+                  <label className="block text-xs font-semibold uppercase text-bank-muted">
+                    Uzņēmuma nosaukums
+                    <input
+                      required
+                      maxLength={120}
+                      value={newAccount.company_name}
+                      onChange={(event) =>
+                        setNewAccount((prev) => ({ ...prev, company_name: sanitizeCompanyName(event.target.value) }))
+                      }
+                      placeholder="Piemēram, SIA Demo Banka"
+                      className="mt-1 w-full rounded-lg border border-bank-border bg-bank-panel-soft px-3 py-2 text-sm"
+                    />
+                  </label>
+
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <label className="block text-xs font-semibold uppercase text-bank-muted">
+                      Reģistrācijas numurs
+                      <input
+                        required
+                        maxLength={20}
+                        value={newAccount.registration_number}
+                        onChange={(event) =>
+                          setNewAccount((prev) => ({
+                            ...prev,
+                            registration_number: sanitizeRegistrationNumber(event.target.value),
+                          }))
+                        }
+                        inputMode="text"
+                        placeholder="40001234567"
+                        className="mt-1 w-full rounded-lg border border-bank-border bg-bank-panel-soft px-3 py-2 text-sm uppercase"
+                      />
+                    </label>
+
+                    <label className="block text-xs font-semibold uppercase text-bank-muted">
+                      PVN numurs (neobligāts)
+                      <input
+                        maxLength={20}
+                        value={newAccount.vat_number}
+                        onChange={(event) =>
+                          setNewAccount((prev) => ({
+                            ...prev,
+                            vat_number: sanitizeVatNumber(event.target.value),
+                          }))
+                        }
+                        inputMode="text"
+                        placeholder="LV40001234567"
+                        className="mt-1 w-full rounded-lg border border-bank-border bg-bank-panel-soft px-3 py-2 text-sm uppercase"
+                      />
+                    </label>
+                  </div>
+                </div>
+              )}
+
+              {newAccount.type === 'savings' && (
+                <div className="space-y-3 rounded-lg border border-bank-border bg-bank-panel-soft/55 p-3">
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-bank-muted">Personas dati</p>
+
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <label className="block text-xs font-semibold uppercase text-bank-muted">
+                      Vārds
+                      <input
+                        required
+                        maxLength={40}
+                        value={newAccount.first_name}
+                        onChange={(event) =>
+                          setNewAccount((prev) => ({ ...prev, first_name: sanitizeNamePart(event.target.value) }))
+                        }
+                        placeholder="Jānis"
+                        className="mt-1 w-full rounded-lg border border-bank-border bg-bank-panel-soft px-3 py-2 text-sm"
+                      />
+                    </label>
+
+                    <label className="block text-xs font-semibold uppercase text-bank-muted">
+                      Uzvārds
+                      <input
+                        required
+                        maxLength={40}
+                        value={newAccount.last_name}
+                        onChange={(event) =>
+                          setNewAccount((prev) => ({ ...prev, last_name: sanitizeNamePart(event.target.value) }))
+                        }
+                        placeholder="Bērziņš"
+                        className="mt-1 w-full rounded-lg border border-bank-border bg-bank-panel-soft px-3 py-2 text-sm"
+                      />
+                    </label>
+                  </div>
+
+                  <label className="block text-xs font-semibold uppercase text-bank-muted">
+                    Personas kods
+                    <input
+                      required
+                      maxLength={12}
+                      value={newAccount.personal_code}
+                      onChange={(event) =>
+                        setNewAccount((prev) => ({ ...prev, personal_code: sanitizePersonalCode(event.target.value) }))
+                      }
+                      inputMode="numeric"
+                      placeholder="010190-12345"
+                      className="mt-1 w-full rounded-lg border border-bank-border bg-bank-panel-soft px-3 py-2 text-sm"
+                    />
+                  </label>
+                </div>
+              )}
+
               <button
                 type="submit"
                 disabled={createAccountLoading}
@@ -520,7 +635,7 @@ export function DashboardAccountsView({
               </button>
             </form>
 
-            <aside className="space-y-3 rounded-lg border border-bank-border bg-bank-panel-soft/55 p-3">
+            <aside className="self-start space-y-3 rounded-lg border border-bank-border bg-bank-panel-soft/55 p-3">
               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-bank-muted">Produkta piezīmes</p>
               <p className="text-sm text-bank-muted">
                 Personīgais konts paredzēts ikdienas maksājumiem, uzņēmuma konts - biznesa plūsmai, uzkrājumu konts -

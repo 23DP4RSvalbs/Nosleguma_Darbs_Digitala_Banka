@@ -13,6 +13,26 @@ export function sanitizeAccountName(value: string): string {
   return value.replace(/[<>{}[\]"]/g, '').replace(/\s+/g, ' ').slice(0, 80);
 }
 
+export function sanitizeCompanyName(value: string): string {
+  return value.replace(/[<>{}[\]"]/g, '').replace(/\s+/g, ' ').slice(0, 120);
+}
+
+export function sanitizeRegistrationNumber(value: string): string {
+  return value.replace(/[^A-Za-z0-9-]/g, '').toUpperCase().slice(0, 20);
+}
+
+export function sanitizeVatNumber(value: string): string {
+  return value.replace(/[^A-Za-z0-9-]/g, '').toUpperCase().slice(0, 20);
+}
+
+export function sanitizeNamePart(value: string): string {
+  return value.replace(/[^A-Za-zĀ-ž\s'-]/gu, '').replace(/\s+/g, ' ').slice(0, 40);
+}
+
+export function sanitizePersonalCode(value: string): string {
+  return value.replace(/[^0-9-]/g, '').slice(0, 12);
+}
+
 export function sanitizePlainText(value: string, maxLength: number): string {
   return value.replace(/[<>{}]/g, '').slice(0, maxLength);
 }

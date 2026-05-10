@@ -112,6 +112,12 @@ export interface Account {
   currency: string;
   balance: string;
   type: AccountType;
+  company_name: string | null;
+  registration_number: string | null;
+  vat_number: string | null;
+  first_name: string | null;
+  last_name: string | null;
+  personal_code: string | null;
   status: AccountStatus;
   access_role?: 'admin' | AccountMemberRole | 'none';
   can_initiate_transfer?: boolean;
@@ -225,6 +231,12 @@ export interface NewAccountState {
   name: string;
   currency: string;
   type: AccountType;
+  company_name: string;
+  registration_number: string;
+  vat_number: string;
+  first_name: string;
+  last_name: string;
+  personal_code: string;
 }
 
 export interface NewMemberState {

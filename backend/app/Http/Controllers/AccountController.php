@@ -65,6 +65,12 @@ class AccountController extends Controller
             'name' => ['required', 'string', 'max:120'],
             'currency' => ['required', 'string', 'size:3'],
             'type' => ['required', 'in:personal,business,savings'],
+            'company_name' => ['required_if:type,business', 'nullable', 'string', 'max:120'],
+            'registration_number' => ['required_if:type,business', 'nullable', 'string', 'max:20', 'regex:/^[A-Za-z0-9-]+$/'],
+            'vat_number' => ['nullable', 'string', 'max:20', 'regex:/^[A-Za-z0-9-]+$/'],
+            'first_name' => ['required_if:type,savings', 'nullable', 'string', 'max:40', "regex:/^[\\pL\\s'-]+$/u"],
+            'last_name' => ['required_if:type,savings', 'nullable', 'string', 'max:40', "regex:/^[\\pL\\s'-]+$/u"],
+            'personal_code' => ['required_if:type,savings', 'nullable', 'string', 'max:12', 'regex:/^[0-9-]+$/'],
         ]);
 
         $user = $request->user();
@@ -76,6 +82,12 @@ class AccountController extends Controller
             'currency' => strtoupper($validated['currency']),
             'balance' => self::NEW_ACCOUNT_STARTER_BALANCE,
             'type' => $validated['type'],
+            'company_name' => $validated['company_name'] ?? null,
+            'registration_number' => $validated['registration_number'] ?? null,
+            'vat_number' => $validated['vat_number'] ?? null,
+            'first_name' => $validated['first_name'] ?? null,
+            'last_name' => $validated['last_name'] ?? null,
+            'personal_code' => $validated['personal_code'] ?? null,
             'status' => 'active',
         ]);
 
@@ -141,6 +153,12 @@ class AccountController extends Controller
             'name' => ['sometimes', 'string', 'max:120'],
             'status' => ['sometimes', 'in:active,frozen,closed'],
             'type' => ['sometimes', 'in:personal,business,savings'],
+            'company_name' => ['required_if:type,business', 'nullable', 'string', 'max:120'],
+            'registration_number' => ['required_if:type,business', 'nullable', 'string', 'max:20', 'regex:/^[A-Za-z0-9-]+$/'],
+            'vat_number' => ['nullable', 'string', 'max:20', 'regex:/^[A-Za-z0-9-]+$/'],
+            'first_name' => ['required_if:type,savings', 'nullable', 'string', 'max:40', "regex:/^[\\pL\\s'-]+$/u"],
+            'last_name' => ['required_if:type,savings', 'nullable', 'string', 'max:40', "regex:/^[\\pL\\s'-]+$/u"],
+            'personal_code' => ['required_if:type,savings', 'nullable', 'string', 'max:12', 'regex:/^[0-9-]+$/'],
         ]);
 
         if (! $canUpdateMetadata) {
