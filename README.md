@@ -36,18 +36,19 @@ Digitālās bankas tīmekļa lietotne ar Laravel backendu un React frontendiem. 
 ## Palaišana Lokāli
 
 Visas komandas zemāk ir paredzētas palaišanai no projekta saknes mapes.
+Tās darbojas jebkurā terminalī, kas spēj izpildīt PHP un Node komandas.
+Ja tev šie rīki jau ir instalēti, vari pāriet tieši uz backend un frontend blokiem.
 
 ### Sagatavošana
 
-Uz Ubuntu/Linux instalē precīzās versijas šādi:
+Nepieciešamās versijas:
 
-```bash
-sudo add-apt-repository ppa:ondrej/php -y
-sudo apt update
-sudo apt install -y php8.2 php8.2-cli php8.2-fpm php8.2-mbstring php8.2-xml php8.2-sqlite3 php8.2-curl php8.2-zip php8.2-intl php8.2-bcmath unzip git curl
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-sudo apt install -y nodejs
-```
+- PHP 8.2+
+- Composer
+- Node.js 18+
+- npm
+
+Ja kaut kas no tā nav instalēts, uzliec to ar savai sistēmai piemēroto pakotņu pārvaldnieku vai instalācijas rīku. Šī repozitorija README fokusējas uz projekta palaišanas komandām, nevis uz konkrētas operētājsistēmas instalēšanu.
 
 ```bash
 php -v
@@ -56,7 +57,7 @@ node -v
 npm -v
 ```
 
-Ja `php -v` rāda versiju zem `8.2`, vispirms uzinstalē PHP 8.2 un vajadzīgos paplašinājumus.
+Ja `php -v` rāda versiju zem `8.2`, vispirms atjaunini PHP un vajadzīgos paplašinājumus. Ja `node -v` ir zem `18`, atjaunini Node.js.
 
 ### Backend
 
