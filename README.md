@@ -39,6 +39,16 @@ Visas komandas zemāk ir paredzētas palaišanai no projekta saknes mapes.
 
 ### Sagatavošana
 
+Uz Ubuntu/Linux instalē precīzās versijas šādi:
+
+```bash
+sudo add-apt-repository ppa:ondrej/php -y
+sudo apt update
+sudo apt install -y php8.2 php8.2-cli php8.2-fpm php8.2-mbstring php8.2-xml php8.2-sqlite3 php8.2-curl php8.2-zip php8.2-intl php8.2-bcmath unzip git curl
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install -y nodejs
+```
+
 ```bash
 php -v
 composer -V
