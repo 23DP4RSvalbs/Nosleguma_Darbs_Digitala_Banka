@@ -15,7 +15,8 @@ services:
       - DB_DATABASE=/var/www/database/database.sqlite
     ports:
       - "8000:8000"
-    command: sh -c "php artisan migrate --force || true && php artisan serve --host=0.0.0.0 --port=8000"
+    # On first start: generate key, migrate and seed once, then serve. Uses /var/www/.initialized file to avoid reseeding.
+    command: sh -c "if [ ! -f /var/www/.initialized ]; then php artisan key:generate --force || true; php artisan migrate --force; php artisan db:seed --class=DatabaseSeeder --force; touch /var/www/.initialized; fi; php artisan serve --host=0.0.0.0 --port=8000"
 
   web:
     image: nginx:stable-alpine

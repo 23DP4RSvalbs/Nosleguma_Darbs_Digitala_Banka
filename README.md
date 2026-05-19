@@ -93,6 +93,35 @@ Atver:
 - backend: `http://localhost:8000`
 - frontend: `http://localhost:5173`
 
+## Startēšana
+
+Docker:
+```bash
+docker compose -f docker-compose.prod.yml up --build -d
+```
+
+Pirmās palaišanas laikā `docker-compose.prod.yml` automātiski izpilda migrācijas un ielādē demo datus backendā. Nākamajās palaišanās reizēs tas vairs neveic atkārtotu seed, jo tiek izmantots `.initialized` atzīmes fails. Ja demo dati šķiet pazuduši vai importēšana nav notikusi, izdzēs `backend/.initialized` un `backend/database/database.sqlite`, tad palaid komandu vēlreiz, vai arī palaid seed manuāli:
+
+```bash
+cd backend
+php artisan db:seed --class=DatabaseSeeder
+```
+
+Bez Docker (ja viss instalēts):
+```bash
+cd backend
+composer install
+cp .env.example .env
+mkdir -p database && touch database/database.sqlite
+php artisan migrate:fresh --seed
+php artisan serve --host=0.0.0.0 --port=8000
+
+cd ../frontend
+npm install
+printf "VITE_API_URL=http://localhost:8000\n" > .env
+npm run dev
+```
+
 ## Pārbaudes Komandas
 
 ```bash
@@ -111,7 +140,8 @@ npm run lint
 - Demo konti ir latviešu valodā.
 - Visiem demo kontiem 2FA ir atslēgts.
 - `Konti.txt` satur sākotnējos piekļuves datus.
-- Demo datubāzi izveido `php artisan migrate:fresh --seed` backend mapē.
+- Demo datubāzi bez Docker izveido ar `php artisan migrate:fresh --seed` backend mapē.
+- Docker režīmā demo dati tiek ielādēti automātiski tikai pirmajā startā.
 - Ja datubāze jau eksistē, demo datus var pārrakstīt ar `php artisan db:seed --class=DatabaseSeeder`.
 
 ## Pieejamība Un Drošība
