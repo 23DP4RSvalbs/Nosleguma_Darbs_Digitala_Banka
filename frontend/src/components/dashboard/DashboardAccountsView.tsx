@@ -30,6 +30,7 @@ interface DashboardAccountsViewProps {
   defaultAccountFilters: AccountFilterState;
 
   accountsLoading: boolean;
+  accountsError: string | null;
   accounts: Account[];
   accountsPage: PaginatedResponse<Account> | null;
 
@@ -96,6 +97,7 @@ export function DashboardAccountsView({
   setAccountPage,
   defaultAccountFilters,
   accountsLoading,
+  accountsError,
   accounts,
   accountsPage,
   formatMoney,
@@ -328,7 +330,11 @@ export function DashboardAccountsView({
               </article>
             )}
 
-            {accountsLoading ? (
+            {accountsError ? (
+              <div className="rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-700">
+                {accountsError}
+              </div>
+            ) : accountsLoading ? (
               <p className="text-sm text-bank-muted">Notiek kontu ielāde...</p>
             ) : accounts.length === 0 ? (
               <p className="text-sm text-bank-muted">Konti netika atrasti.</p>

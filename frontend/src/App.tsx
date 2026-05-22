@@ -1180,6 +1180,7 @@ function App() {
       const response = await api.get<PaginatedResponse<Account>>('/accounts', { params });
       setAccountsPage(response.data);
     } catch (error) {
+      setAccountsPage(null);
       setAccountsError(extractApiError(error, 'Neizdevās ielādēt kontus.'));
     } finally {
       setAccountsLoading(false);
@@ -2390,7 +2391,7 @@ function App() {
         });
       }
 
-      await Promise.all([fetchAdminUsers(), fetchAdminMetrics()]);
+      await Promise.all([fetchAdminUsers(), fetchAdminMetrics(), fetchAccounts()]);
     } catch (error) {
       setAdminUsersError(extractApiError(error, 'Neizdevās atjaunināt lietotāju.'));
     } finally {
@@ -2955,6 +2956,7 @@ function App() {
               setAccountPage={setAccountPage}
               defaultAccountFilters={defaultAccountFilters}
               accountsLoading={accountsLoading}
+              accountsError={accountsError}
               accounts={accounts}
               accountsPage={accountsPage}
               formatMoney={formatMoneyForUser}

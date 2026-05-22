@@ -4,7 +4,7 @@ Administrators:
 - admin@demo.lv : ParoleAdmin1! : admin : active
 
 Lietotāji (29):
-// Statusu cikls: active, blocked, pending, frozen
+
 
 user1@demo.lv : Parole1! : user : active
 user2@demo.lv : Parole2! : user : blocked
